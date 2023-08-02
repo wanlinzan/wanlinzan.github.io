@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>加载中</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <!-- 调试用的移动端 console -->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>-->
+    <!--    <script>eruda.init();</script>-->
+    <!--    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>-->
+    <script src="./zepto.min.js"></script>
+    <style type="text/css">
+
+        body {
+            margin: 0;
+            height: 100%;
+            font-family: "微软雅黑", serif;
+        }
+
+        #main {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0eff4;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div id="main">
+
+
+</div>
+</body>
+<script>
+
+
+    function getQueryVariable(variable) {
+        var vars;
+        if (window.location.search === '') {
+            var temp = window.location.hash.split("?");
+            if (temp[1]) {
+                vars = temp[1].split('&');
+            } else {
+                vars = [];
+            }
+        } else {
+            vars = window.location.search.substring(1).split("&");
+        }
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] === variable) {
+                return pair[1];
+            }
+        }
+        return '';
+    }
+
+    let id = getQueryVariable('id');
+
+    $.ajax({
+        url: 'https://tbjhz.duomiao.pro/user/real-url',
+        success: (res) => {
+            window.location.href = res.data.real_url + '/aa?id=' + id
+        }
+    });
+
+</script>
+</html>
